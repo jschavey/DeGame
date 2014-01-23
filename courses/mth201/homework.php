@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$query = "SELECT * FROM homework WHERE course='MTH201'";
+$query = "SELECT id, assignment, description, due, completed FROM homework WHERE course='MTH201'";
 
 if ($stmt = mysqli_prepare($link, $query)) {
 
@@ -19,16 +19,14 @@ if ($stmt = mysqli_prepare($link, $query)) {
     mysqli_stmt_execute($stmt);
 
     /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_course, $tmp_assignment, $tmp_due, $tmp_value, $tmp_score, $tmp_completed);
+    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_assignment, $tmp_description, $tmp_due, $tmp_completed);
 
     /* fetch values */
     while (mysqli_stmt_fetch($stmt)) {
         $id[] = $tmp_id;
-        $course[] = $tmp_course;
         $assignment[] = $tmp_assignment;
+		$description[] = $tmp_description;
         $due[] = $tmp_due;
-        $value[] = $tmp_value;
-        $score[] = $tmp_score;
         $completed[] = $tmp_completed;
     }
 
