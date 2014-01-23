@@ -11,7 +11,7 @@
 <li>insertion code (insert object that works with ANYTHING??</li>
 <li>sql table display code that works with anything??</li></ul>
 <li>update sql table with completed status on checkbox toggle</li>
-<li>separate assignment name from assignment description for grades</li></ul>
+<li>separate assignment name from assignment description for grades &#10004;</li></ul>
 
 <div id="insert" name="insert" class="insert">
 

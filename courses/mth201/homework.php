@@ -49,7 +49,7 @@ mysqli_close($link);
 <? for($i=0; $i<(count($id)); $i++){ ?>
 	<tr>
 		<td class="date"><?echo $due[$i];?></td>
-		<td class="name"><?echo $assignment[$i];?></td>
+		<td class="name"><?echo $assignment[$i];?> <br> <?echo $description[$i];?></td>
 <!--		<td class="completed"><input type="checkbox" value="completed"></td> -->
 	</tr>
 <? } ?>
