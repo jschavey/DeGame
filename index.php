@@ -5,8 +5,8 @@ error_reporting(E_ALL);
 
 $self = "index.php";
 
-
-require_once('header.php');
+require_once('includes/connectvars.php');
+require_once('includes/header.php');
 
 ?>
 
@@ -17,6 +17,6 @@ require_once('header.php');
 
 <?php
 
-require_once('footer.php');
+require_once('includes/footer.php');
 
 ?>

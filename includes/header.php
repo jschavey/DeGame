@@ -4,8 +4,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="includes/style.css" />
 	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
 
@@ -14,8 +15,8 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-require_once('banner.php');
-require_once('nav.php');
+require_once('includes/banner.php');
+require_once('includes/nav.php');
 ?>
 
 

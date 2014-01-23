@@ -1,5 +1,5 @@
 body {
-  background: rgba(0,0,0,0.5);
+  background: rgba(115,115,115,1);
   font-family: "Helvetica", sans-serif;
 }
 
@@ -58,4 +58,24 @@ button {
 }.current {
 	color: #e39b00;
 	text-decoration: underline;	
+}
+
+table {
+
+}.homework {
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
+}.homework .date {
+	text-align: center;	
+}.homework .name {
+	text-align: left;
+}.homework .value {
+	text-align: center;
+}
+tr:nth-child(odd) {
+	background-color: rgba(115,115,115,1);
+}
+tr:nth-child(even) {
+	background-color: rgba(150,150,150,1);
 }
