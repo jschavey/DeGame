@@ -44,13 +44,13 @@ mysqli_close($link);
 	<tr>
 		<th clas="date">Due Date</th>
 		<th class="name">Assignments</th>
-		<th class="completed">Completed<br>(To Be Implemented)</th>
+<!--		<th class="completed">Completed<br>(To Be Implemented)</th> -->
 	</tr>
 <? for($i=0; $i<(count($id)); $i++){ ?>
 	<tr>
 		<td class="date"><?echo $due[$i];?></td>
 		<td class="name"><?echo $assignment[$i];?></td>
-		<td class="completed"><input type="checkbox" value="completed"></td>
+<!--		<td class="completed"><input type="checkbox" value="completed"></td> -->
 	</tr>
 <? } ?>
 </table>
