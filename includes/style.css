@@ -70,7 +70,9 @@ table {
 	text-align: center;	
 }.homework .name {
 	text-align: left;
-}.homework .value {
+}.homework .completed {
+	text-align: center;
+}.grades .value {
 	text-align: center;
 }
 tr:nth-child(odd) {

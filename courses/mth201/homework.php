@@ -19,7 +19,7 @@ if ($stmt = mysqli_prepare($link, $query)) {
     mysqli_stmt_execute($stmt);
 
     /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_course, $tmp_assignment, $tmp_due, $tmp_value, $tmp_score);
+    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_course, $tmp_assignment, $tmp_due, $tmp_value, $tmp_score, $tmp_completed);
 
     /* fetch values */
     while (mysqli_stmt_fetch($stmt)) {
@@ -29,6 +29,7 @@ if ($stmt = mysqli_prepare($link, $query)) {
         $due[] = $tmp_due;
         $value[] = $tmp_value;
         $score[] = $tmp_score;
+        $completed[] = $tmp_completed;
     }
 
     /* close statement */
@@ -45,15 +46,13 @@ mysqli_close($link);
 	<tr>
 		<th clas="date">Due Date</th>
 		<th class="name">Assignments</th>
-		<th class="score">Score</th>
-		<th class="value">Value</th>
+		<th class="completed">Completed<br>(To Be Implemented)</th>
 	</tr>
 <? for($i=0; $i<(count($id)); $i++){ ?>
 	<tr>
 		<td class="date"><?echo $due[$i];?></td>
 		<td class="name"><?echo $assignment[$i];?></td>
-		<td class="score"></td>
-		<td class="value"><?echo $value[$i];?></td>
+		<td class="completed"><input type="checkbox" value="completed"></td>
 	</tr>
 <? } ?>
 </table>
