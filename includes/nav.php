@@ -1,10 +1,48 @@
-<div class="nav">
-	
-	<a href="courses/mth201.php" class="default">Calculus I</a> |
-	<a href="courses/art132.php" class="default">3D Design Concepts</a> |
-	<a href="courses/csc126.php" class="default">Game Design</a> |
-	<a href="courses/mus120.php" class="default">Music Appreciation</a> 
+<!-- navigation prototype -->
 
+<!-- database management -->
+<?php
+require_once('connectvars.php');
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+// determine course to output homework for
+
+$query = "SELECT * FROM courses WHERE deprecated='0'";
+
+if ($stmt = mysqli_prepare($link, $query)) {
+
+    /* execute statement */
+    mysqli_stmt_execute($stmt);
+
+    /* bind result variables */
+    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_code, $tmp_name, $tmp_deprecated);
+
+    /* fetch values */
+    while (mysqli_stmt_fetch($stmt)) {
+        $id[] = $tmp_id;
+        $code[] = $tmp_code;
+        $name[] = $tmp_name;
+        $deprecated[] = $tmp_deprecated;
+    }
+
+    /* close statement */
+    mysqli_stmt_close($stmt);
+}
+
+/* close connection */
+mysqli_close($link);
+?>
+
+<div class="nav">
+<? for($i=0; $i<(count($id)); $i++){ ?>	
+	 [ <a href="course.php?course=<?echo $code[$i];?>" class="default"><?echo $name[$i];?></a> ] 
+<? } ?>
 </div>
 
 <script> // function updates content
