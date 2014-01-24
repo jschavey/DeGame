@@ -2,8 +2,8 @@
 
 <div class="nav">
 
-	[ <a href="homework.php?course=<?echo $course;?>" class="default">Homework</a> ]
-	[ <a href="grades.php?course=<?echo $course;?>" class="default">Grades</a> ]
+	[ <a name="course" href="homework.php?course=<?echo $course;?>" class="default">Homework</a> ]
+	[ <a name="course" href="grades.php?course=<?echo $course;?>" class="default">Grades</a> ]
 
 </div>
 
@@ -18,5 +18,9 @@
 		$.get( href, function( data ) {
 			$( "#course" ).load(href);
 		});
+		
+		// link navigation cosmetics
+		$('a[name=course]').removeClass("current").addClass("default");
+		$(this).removeClass("default").addClass("current");
 	});
 </script>
