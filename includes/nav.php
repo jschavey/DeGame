@@ -39,6 +39,10 @@ if ($stmt = mysqli_prepare($link, $query)) {
 mysqli_close($link);
 ?>
 
+<!-- end db management -->
+
+<!-- begin view -->
+
 <div class="nav">
 <? for($i=0; $i<(count($id)); $i++){ ?>	
 	 [ <a href="course.php?course=<?echo $code[$i];?>" class="default"><?echo $name[$i];?></a> ] 
@@ -53,5 +57,9 @@ mysqli_close($link);
 		$.get( href, function( data ) {
 			$( "#content" ).load(href);
 		});
+		
+		// link navigation cosmetics
+		$('a').removeClass("current").addClass("default");
+		$(this).removeClass("default").addClass("current");
 	});
 </script>

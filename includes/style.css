@@ -28,7 +28,7 @@ div {
 }
 
 a.default {
-	color: #e39b00;
+	color: #000000;
 	text-decoration: none;
 }.current {
 	color: #e39b00;
@@ -37,27 +37,6 @@ a.default {
 
 h1, h4 {
 	text-align: center;
-}
-
-button {
-    background:none!important;
-    border:none; 
-    padding:0!important;
-}.default {
-	text-indent:0;
-	display:inline-block;
-	color: #e39b00;
-	font-size:15px;
-	text-decoration:none;
-	text-align:center;
-}.default:hover {
-	text-decoration: underline;
-}.default:active {
-	position:relative;
-	top:1px;
-}.current {
-	color: #e39b00;
-	text-decoration: underline;	
 }
 
 table {

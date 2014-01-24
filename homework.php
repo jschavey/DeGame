@@ -41,7 +41,6 @@ if ($stmt = mysqli_prepare($link, $query)) {
 mysqli_close($link);
 ?>
 
-
 <br>
 <table class="homework">
 	<tr>
