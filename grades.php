@@ -61,5 +61,3 @@ mysqli_close($link);
 		<td class="score"><?echo array_sum($score);?></td>
 		<td class="value"><?echo array_sum($value);?></td>
 </table>
-	
-<h4>Grades From Database</h4>

@@ -9,18 +9,3 @@
 
 <div id="course">
 </div>
-
-<script> // function updates content
-   $('a').click(function(){
-	    event.preventDefault();
-		var href = $(this).attr('href');
-
-		$.get( href, function( data ) {
-			$( "#course" ).load(href);
-		});
-		
-		// link navigation cosmetics
-		$('a[name=course]').removeClass("current").addClass("default");
-		$(this).removeClass("default").addClass("current");
-	});
-</script>

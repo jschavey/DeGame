@@ -1,65 +1,58 @@
-<!-- navigation prototype -->
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//	SCRIPT: nav.php	- generates navigation bar based on database input
+//
+//	02.15.2014	|	js	|	updated comment style
+//						|	updated to support mySQL library
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<!-- database management -->
-<?php
-require_once('connectvars.php');
-$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+//	Includes	//////////////////////////////////////////////////////////////////////////////////////
 
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
+require_once('includes/mySQL.php');
 
-// determine course to output homework for
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$query = "SELECT * FROM courses WHERE deprecated='0'";
+//	Data	//////////////////////////////////////////////////////////////////////////////////////////
 
-if ($stmt = mysqli_prepare($link, $query)) {
+$select = "SELECT * FROM courses";
+$where	= "WHERE deprecated='0'";
+$data = select($select, $where);
 
-    /* execute statement */
-    mysqli_stmt_execute($stmt);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_code, $tmp_name, $tmp_deprecated);
+//	Logic	//////////////////////////////////////////////////////////////////////////////////////////?>
 
-    /* fetch values */
-    while (mysqli_stmt_fetch($stmt)) {
-        $id[] = $tmp_id;
-        $code[] = $tmp_code;
-        $name[] = $tmp_name;
-        $deprecated[] = $tmp_deprecated;
-    }
+<script>
 
-    /* close statement */
-    mysqli_stmt_close($stmt);
-}
+$( document ).on( "click", "a", function( event ) {
+	var target = event.target;
+	event.preventDefault();
+	event.stopPropagation();
+		
+	var href = $( target ).attr( "href" );
+	
+	$( "div#sub_nav" ).load( "" + href + "" );
+	
+	// link navigation cosmetics
+	$('a').removeClass("current").addClass("default");
+	$(this).removeClass("default").addClass("current");
+});
 
-/* close connection */
-mysqli_close($link);
-?>
+</script>
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<!-- end db management -->
-
-<!-- begin view -->
+//	View	//////////////////////////////////////////////////////////////////////////////////////////?>
 
 <div class="nav">
-<? for($i=0; $i<(count($id)); $i++){ ?>	
-	 [ <a href="course.php?course=<?echo $code[$i];?>" class="default"><?echo $name[$i];?></a> ] 
+<? foreach ($data as $nav) { ?>	
+	 [ <a href="course.php?course=<?echo $nav['course'];?>" class="default"><?echo $nav['name'];?></a> ] 
 <? } ?>
 </div>
 
-<script> // function updates content
-   $('a').click(function(){
-	    event.preventDefault();
-		var href = $(this).attr('href');
-
-		$.get( href, function( data ) {
-			$( "#content" ).load(href);
-		});
-		
-		// link navigation cosmetics
-		$('a').removeClass("current").addClass("default");
-		$(this).removeClass("default").addClass("current");
-	});
-</script>
+<div class="sub_nav">
+</div>
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////?>	

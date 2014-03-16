@@ -1,60 +1,58 @@
-<!-- homework page prototype -->
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//	PAGE: homework.php	- displays homework for course as tabular data
+//
+//	02.15.2014	|	js	|	revamped to use mySQL library
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<!-- database management -->
-<?php
-require_once('includes/connectvars.php');
-$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+//	Includes	//////////////////////////////////////////////////////////////////////////////////////
 
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
+require_once('includes/mySQL.php');
 
-// determine course to output homework for
-$course = $link->real_escape_string($_REQUEST['course']);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$query = "SELECT id, assignment, description, due, completed FROM homework WHERE course='".$course."'";
+//	Inputs	//////////////////////////////////////////////////////////////////////////////////////////
 
-if ($stmt = mysqli_prepare($link, $query)) {
+$course = $_REQUEST['course'];
+//var_dump($course);
 
-    /* execute statement */
-    mysqli_stmt_execute($stmt);
+//	Data	//////////////////////////////////////////////////////////////////////////////////////////
 
-    /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $tmp_id, $tmp_assignment, $tmp_description, $tmp_due, $tmp_completed);
+$select 	= "SELECT due,
+				CONCAT(assignment, description) AS details,
+				completed FROM homework";
+$where		= "WHERE course='$course'";
+$homework 	= select($select, $where);
 
-    /* fetch values */
-    while (mysqli_stmt_fetch($stmt)) {
-        $id[] = $tmp_id;
-        $assignment[] = $tmp_assignment;
-		$description[] = $tmp_description;
-        $due[] = $tmp_due;
-        $completed[] = $tmp_completed;
-    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /* close statement */
-    mysqli_stmt_close($stmt);
-}
+//	Logic	//////////////////////////////////////////////////////////////////////////////////////////?>
 
-/* close connection */
-mysqli_close($link);
-?>
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//	View	//////////////////////////////////////////////////////////////////////////////////////////?>
 
 <br>
-<table class="homework">
-	<tr>
-		<th clas="date">Due Date</th>
-		<th class="name">Assignments</th>
-		<th class="completed">Completed</th> 
-	</tr>
-<? for($i=0; $i<(count($id)); $i++){ ?>
-	<tr>
-		<td class="date"><?echo $due[$i];?></td>
-		<td class="name"><?echo $assignment[$i];?> <br> <?echo $description[$i];?></td>
-		<td class="completed"><?if($completed[$i]) echo '&#10004;';?> </td>
-	</tr>
-<? } ?>
+<table id="homeworkTable">
+	<thead>
+		<tr>
+			<th>Due Date</th>
+			<th>Details</th>
+			<th>Completed</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?foreach( $homework as $assignment ) {?>
+		<tr>
+			<td><?=$assignment['due'];?></td>
+			<td><?=$assignment['details']?></td>
+			<td><?=$assignment['completed']?></td>
+		</tr>
+		<?} unset( $assignment );?>
+	</tbody>
 </table>
-	
-<h4>Homework From Database</h4>
+<?
+//////////////////////////////////////////////////////////////////////////////////////////////////////?>

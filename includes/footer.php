@@ -1,7 +1,7 @@
 		<br>
 		<br>
 		<div class="footer">
-			Made in America, Designed in America.  Engagement Studio LLC
+			A Product of America, John Schavey
 		</div>
 	</body>
 </html>
